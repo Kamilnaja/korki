@@ -1,3 +1,19 @@
-<pre
-  >{{ response$ | async | json }}
-</pre>
+<pre>{{ foodForm.value | json }}</pre>
+<div [formGroup]="foodForm">
+  <label
+    >name
+    <input formControlName="name" />
+  </label>
+  <label
+    >id
+    <input formControlName="id" />
+  </label>
+  <label
+    >caloriesPer100g
+    <input formControlName="caloriesPer100g" />
+  </label>
+  <label
+    >weight
+    <input formControlName="weight" />
+  </label>
+</div>
