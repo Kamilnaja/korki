@@ -8,17 +8,23 @@ import { FoodsState } from './foods.state';
   styleUrls: ['./foods.component.scss'],
 })
 export class FoodsComponent implements OnInit {
-  response$ = this.state.foods$;
+  foods$ = this.state.foods$;
   foodForm = this.fb.group({
     name: ['Cottage cheese'],
     id: ['1'],
     caloriesPer100g: [100],
     weight: [100],
+    nutriScore: ['A'],
+    tags: [1],
   });
 
   constructor(private state: FoodsState, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.state.getFoods();
+  }
+
+  onSubmit(): void {
+    console.log(this.foodForm.value);
   }
 }

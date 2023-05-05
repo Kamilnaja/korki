@@ -1,19 +1,42 @@
-<pre>{{ foodForm.value | json }}</pre>
 <div [formGroup]="foodForm">
-  <label
-    >name
-    <input formControlName="name" />
-  </label>
-  <label
-    >id
-    <input formControlName="id" />
-  </label>
-  <label
-    >caloriesPer100g
-    <input formControlName="caloriesPer100g" />
-  </label>
-  <label
-    >weight
-    <input formControlName="weight" />
-  </label>
+  <div>
+    <label
+      >name
+      <input formControlName="name" />
+    </label>
+  </div>
+  <div>
+    <label
+      >id
+      <input formControlName="id" />
+    </label>
+  </div>
+  <div>
+    <label
+      >caloriesPer100g
+      <input formControlName="caloriesPer100g" />
+    </label>
+  </div>
+  <div>
+    <label
+      >weight
+      <input formControlName="weight" />
+    </label>
+  </div>
+  <button (click)="onSubmit()">Submit</button>
 </div>
+
+<table *ngIf="foods$ | async as foodsResponse">
+  <tr>
+    <th>id</th>
+    <th>name</th>
+    <th>calories per 100g</th>
+    <th>weight</th>
+  </tr>
+  <tr *ngFor="let item of foodsResponse.data">
+    <td>{{ item.id }}</td>
+    <td>{{ item.name }}</td>
+    <td>{{ item.caloriesPer100g }}</td>
+    <td>{{ item.weight }}</td>
+  </tr>
+</table>
