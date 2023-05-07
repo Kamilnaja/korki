@@ -33,6 +33,9 @@ export class FoodsComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if (this.foodForm.invalid) {
+      return;
+    }
     const food: Food = this.mapFormToFood();
     this.state.postFood(food);
   }
