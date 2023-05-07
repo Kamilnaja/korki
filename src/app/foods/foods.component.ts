@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Food } from './foods.model';
 import { FoodsState } from './foods.state';
+import { TagsState } from './tags.state';
 
 @Component({
   selector: 'app-foods',
@@ -10,19 +11,25 @@ import { FoodsState } from './foods.state';
 })
 export class FoodsComponent implements OnInit {
   foods$ = this.state.foods$;
+  tags$ = this.tagsState.tags$;
+
   foodForm = this.fb.group({
-    name: ['Cottage cheese', [Validators.required]],
-    id: ['1', [Validators.required]],
-    caloriesPer100g: [100, [Validators.required]],
-    weight: [100, [Validators.required]],
-    nutriScore: ['A', [Validators.required]],
-    tags: ['1', [Validators.required]],
+    name: ['', [Validators.required]],
+    caloriesPer100g: [null, [Validators.required]],
+    weight: [null, [Validators.required]],
+    nutriScore: ['', [Validators.required]],
+    tags: ['', [Validators.required]],
   });
 
-  constructor(private state: FoodsState, private fb: FormBuilder) {}
+  constructor(
+    private state: FoodsState,
+    private tagsState: TagsState,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.state.getFoods();
+    this.tagsState.getTags();
   }
 
   onSubmit(): void {

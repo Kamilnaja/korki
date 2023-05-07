@@ -1,14 +1,9 @@
+{{ tags$ | async | json }}
 <div [formGroup]="foodForm">
   <div>
     <label
       >name
       <input formControlName="name" />
-    </label>
-  </div>
-  <div>
-    <label
-      >id
-      <input formControlName="id" />
     </label>
   </div>
   <div>
