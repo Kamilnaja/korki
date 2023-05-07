@@ -1,6 +1,6 @@
-interface Food {
+export interface Food {
   name: string;
-  id: string;
+  id?: string;
   caloriesPer100g: number;
   weight: number;
   nutriScore: string;

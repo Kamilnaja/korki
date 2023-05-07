@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject, take } from 'rxjs';
-import { Response } from './foods.model';
+import { Food, Response } from './foods.model';
 import { FoodsService } from './foods.service';
 
 @Injectable({
@@ -18,6 +18,15 @@ export class FoodsState {
       .pipe(take(1))
       .subscribe((response) => {
         this.foodsSource$.next(response);
+      });
+  }
+
+  postFood(food: Food): void {
+    this.foodsService
+      .postFood(food)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.getFoods();
       });
   }
 }

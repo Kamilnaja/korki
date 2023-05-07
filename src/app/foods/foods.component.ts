@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Food } from './foods.model';
 import { FoodsState } from './foods.state';
+import { TagsState } from './tags.state';
 
 @Component({
   selector: 'app-foods',
@@ -8,17 +10,43 @@ import { FoodsState } from './foods.state';
   styleUrls: ['./foods.component.scss'],
 })
 export class FoodsComponent implements OnInit {
-  response$ = this.state.foods$;
+  foods$ = this.state.foods$;
+  tags$ = this.tagsState.tags$;
+
   foodForm = this.fb.group({
-    name: ['Cottage cheese'],
-    id: ['1'],
-    caloriesPer100g: [100],
-    weight: [100],
+    name: ['', [Validators.required]],
+    caloriesPer100g: [null, [Validators.required]],
+    weight: [null, [Validators.required]],
+    nutriScore: ['', [Validators.required]],
+    tags: ['', [Validators.required]],
   });
 
-  constructor(private state: FoodsState, private fb: FormBuilder) {}
+  constructor(
+    private state: FoodsState,
+    private tagsState: TagsState,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.state.getFoods();
+    this.tagsState.getTags();
+  }
+
+  onSubmit(): void {
+    if (this.foodForm.invalid) {
+      return;
+    }
+    const food: Food = this.mapFormToFood();
+    this.state.postFood(food);
+  }
+
+  private mapFormToFood(): Food {
+    return {
+      name: this.foodForm.value.name ?? '',
+      caloriesPer100g: this.foodForm.value.caloriesPer100g ?? 0,
+      weight: this.foodForm.value.weight ?? 0,
+      nutriScore: this.foodForm.value.nutriScore ?? '',
+      tags: this.foodForm.value.tags ?? '',
+    };
   }
 }
