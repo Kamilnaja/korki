@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Food } from './foods.model';
 import { FoodsState } from './foods.state';
@@ -10,7 +10,11 @@ import { TagsState } from './tags.state';
   styleUrls: ['./foods.component.scss'],
 })
 export class FoodsComponent implements OnInit {
-  foods$ = this.state.foods$;
+  private foodsState = inject(FoodsState);
+  private tagsState = inject(TagsState);
+  private fb = inject(FormBuilder);
+
+  foods$ = this.foodsState.foods$;
   tags$ = this.tagsState.tags$;
 
   foodForm = this.fb.group({
@@ -21,14 +25,8 @@ export class FoodsComponent implements OnInit {
     tags: ['', [Validators.required]],
   });
 
-  constructor(
-    private state: FoodsState,
-    private tagsState: TagsState,
-    private fb: FormBuilder
-  ) {}
-
   ngOnInit(): void {
-    this.state.getFoods();
+    this.foodsState.getFoods();
     this.tagsState.getTags();
   }
 
@@ -37,7 +35,7 @@ export class FoodsComponent implements OnInit {
       return;
     }
     const food: Food = this.mapFormToFood();
-    this.state.postFood(food);
+    this.foodsState.postFood(food);
   }
 
   private mapFormToFood(): Food {

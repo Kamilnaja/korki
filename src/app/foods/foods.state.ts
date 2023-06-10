@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Subject, take } from 'rxjs';
 import { Food, Response } from './foods.model';
 import { FoodsService } from './foods.service';
@@ -10,7 +10,7 @@ export class FoodsState {
   private foodsSource$ = new Subject<Response>();
   foods$ = this.foodsSource$.asObservable();
 
-  constructor(private foodsService: FoodsService) {}
+  private foodsService = inject(FoodsService);
 
   getFoods(): void {
     this.foodsService
