@@ -5,8 +5,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FoodsComponent } from './foods/foods.component';
+import { UppercaseEverySecondPipe } from './foods/uppercase-every-second.pipe';
 @NgModule({
-  declarations: [AppComponent, FoodsComponent],
+  declarations: [AppComponent, FoodsComponent, UppercaseEverySecondPipe],
   imports: [
     BrowserModule,
     AppRoutingModule,

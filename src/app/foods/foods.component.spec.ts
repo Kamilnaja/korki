@@ -1,5 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { FoodsComponent } from './foods.component';
 
 describe('FoodsComponent', () => {
@@ -8,9 +9,9 @@ describe('FoodsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FoodsComponent ]
-    })
-    .compileComponents();
+      declarations: [FoodsComponent],
+      imports: [HttpClientTestingModule, ReactiveFormsModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FoodsComponent);
     component = fixture.componentInstance;
