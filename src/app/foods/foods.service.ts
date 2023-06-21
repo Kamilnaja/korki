@@ -18,4 +18,8 @@ export class FoodsService {
   postFood(food: Food): Observable<Food> {
     return this.httpClient.post<Food>(this.API_FOODS, food);
   }
+
+  getFoodById(id: number): Observable<Food> {
+    return this.httpClient.get<Food>(this.API_FOODS + id);
+  }
 }

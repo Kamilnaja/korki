@@ -1,8 +1,16 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Food } from './foods.model';
 import { FoodsState } from './foods.state';
 import { TagsState } from './tags.state';
+
+interface FoodForm {
+  name: FormControl<string | null>;
+  caloriesPer100g: FormControl<number | null>;
+  weight: FormControl<number | null>;
+  nutriScore: FormControl<string | null>;
+  tags: FormControl<string | null>;
+}
 
 @Component({
   selector: 'app-foods',
@@ -17,17 +25,27 @@ export class FoodsComponent implements OnInit {
   foods$ = this.foodsState.foods$;
   tags$ = this.tagsState.tags$;
 
-  foodForm = this.fb.group({
-    name: ['', [Validators.required]],
-    caloriesPer100g: [null, [Validators.required]],
-    weight: [null, [Validators.required]],
-    nutriScore: ['', [Validators.required]],
-    tags: ['', [Validators.required]],
+  private food$ = this.foodsState.food$;
+
+  foodForm = this.fb.group<FoodForm>({
+    name: this.fb.control('', [Validators.required]),
+    caloriesPer100g: this.fb.control(null, [Validators.required]),
+    weight: this.fb.control(null, [Validators.required]),
+    nutriScore: this.fb.control('', [Validators.required]),
+    tags: this.fb.control('', [Validators.required]),
   });
 
   ngOnInit(): void {
     this.foodsState.getFoods();
     this.tagsState.getTags();
+
+    this.food$.subscribe((food) => {
+      this.foodForm.patchValue(food);
+    });
+  }
+
+  getData() {
+    this.foodsState.getFoodById(1);
   }
 
   onSubmit(): void {

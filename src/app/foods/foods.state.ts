@@ -10,6 +10,9 @@ export class FoodsState {
   private foodsSource$ = new Subject<Response>();
   foods$ = this.foodsSource$.asObservable();
 
+  private foodSource$ = new Subject<Food>();
+  food$ = this.foodSource$.asObservable();
+
   private foodsService = inject(FoodsService);
 
   getFoods(): void {
@@ -28,5 +31,11 @@ export class FoodsState {
       .subscribe(() => {
         this.getFoods();
       });
+  }
+
+  getFoodById(id: number): void {
+    this.foodsService.getFoodById(id).subscribe((food) => {
+      this.foodSource$.next(food);
+    });
   }
 }
