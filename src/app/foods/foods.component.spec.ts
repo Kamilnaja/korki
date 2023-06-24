@@ -1,7 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MockPipe } from 'ng-mocks';
 import { FoodsComponent } from './foods.component';
+import { UppercaseEverySecondPipe } from './uppercase-every-second.pipe';
 
 describe('FoodsComponent', () => {
   let component: FoodsComponent;
@@ -9,7 +11,7 @@ describe('FoodsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FoodsComponent],
+      declarations: [FoodsComponent, MockPipe(UppercaseEverySecondPipe)],
       imports: [HttpClientTestingModule, ReactiveFormsModule],
     }).compileComponents();
 
