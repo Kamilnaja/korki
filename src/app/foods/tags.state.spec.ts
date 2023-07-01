@@ -23,7 +23,6 @@ describe('TagsState', () => {
         TagsState,
         MockProvider(TagsService, {
           getTags: () => {
-            console.log('mock getTags');
             return of(tagsResponse);
           },
         }),

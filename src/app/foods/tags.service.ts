@@ -7,7 +7,7 @@ import { TagsResponse } from './tags.model';
   providedIn: 'root',
 })
 export class TagsService {
-  private readonly API_TAGS = 'http://localhost:8080/api/dicts/tags/';
+  readonly API_TAGS = 'http://localhost:8080/api/dicts/tags/';
 
   constructor(private httpClient: HttpClient) {}
 
