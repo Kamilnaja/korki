@@ -14,8 +14,8 @@ export class FoodsComponent implements OnInit {
   private tagsState = inject(TagsState);
   private fb = inject(FormBuilder);
 
-  foods$ = this.foodsState.foods$;
-  tags$ = this.tagsState.tags$;
+  readonly foods$ = this.foodsState.foods$;
+  readonly tags$ = this.tagsState.tags$;
 
   foodForm = this.fb.group({
     name: ['', [Validators.required]],
