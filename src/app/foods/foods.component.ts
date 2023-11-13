@@ -10,6 +10,8 @@ import { TagsState } from './tags.state';
   styleUrls: ['./foods.component.scss'],
 })
 export class FoodsComponent implements OnInit {
+  count = 0;
+
   private foodsState = inject(FoodsState);
   private tagsState = inject(TagsState);
   private fb = inject(FormBuilder);
@@ -46,5 +48,9 @@ export class FoodsComponent implements OnInit {
       nutriScore: this.foodForm.value.nutriScore ?? '',
       tags: this.foodForm.value.tags ?? '',
     };
+  }
+
+  incrementCount() {
+    this.count++;
   }
 }

@@ -6,7 +6,7 @@ import {
   flush,
 } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MockPipe, MockProvider } from 'ng-mocks';
+import { MockPipe, MockProvider, ngMocks } from 'ng-mocks';
 import { BehaviorSubject } from 'rxjs';
 import { FoodsComponent } from './foods.component';
 import { Tag } from './tags.model';
@@ -70,4 +70,24 @@ describe('FoodsComponent', () => {
     });
     flush();
   }));
+
+  it('increments count', () => {
+    const button = fixture.nativeElement.querySelector('#inc-btn');
+    button.click();
+
+    fixture.detectChanges();
+
+    const span = fixture.nativeElement.querySelector('#count');
+    expect(span.textContent).toBe('1');
+  });
+
+  it('increments count with ng-mocks', () => {
+    const button = ngMocks.find('#inc-btn');
+    ngMocks.click(button);
+
+    fixture.detectChanges();
+
+    const span = ngMocks.find('#count');
+    expect(span.nativeElement.textContent).toBe('1');
+  });
 });
