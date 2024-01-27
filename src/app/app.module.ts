@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FoodsComponent } from './foods/foods.component';
 import { UppercaseEverySecondPipe } from './foods/uppercase-every-second.pipe';
+import { UsersModule } from './users/users.module';
 @NgModule({
   declarations: [AppComponent, FoodsComponent, UppercaseEverySecondPipe],
   imports: [
@@ -13,6 +14,7 @@ import { UppercaseEverySecondPipe } from './foods/uppercase-every-second.pipe';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    UsersModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
